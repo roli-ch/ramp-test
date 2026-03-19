@@ -7,7 +7,7 @@ time = input.running_time()
 
 def ramp(soll, grad):
     global ist, time
-    dt = input.running_time() - time
+    dt =  (input.running_time() - time) * grad
     time = input.running_time()
 
     if ist < soll:
@@ -17,12 +17,12 @@ def ramp(soll, grad):
     else:
         ist = soll
 
-    return ist
+    return min(ist,soll)
 
 soll = 100
 
 def on_forever():
-    val = ramp(soll, 1)
+    val = ramp(soll, 0.2)
     print(val)
     basic.pause(200)
 basic.forever(on_forever)

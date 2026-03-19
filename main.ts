@@ -6,7 +6,7 @@ let time = input.runningTime()
 function ramp(soll: number, grad: number): number {
     let dval: number;
     
-    let dt = input.runningTime() - time
+    let dt = (input.runningTime() - time) * grad
     time = input.runningTime()
     if (ist < soll) {
         dval = soll * dt / 1000
@@ -16,12 +16,12 @@ function ramp(soll: number, grad: number): number {
         ist = soll
     }
     
-    return ist
+    return Math.min(ist, soll)
 }
 
 let soll = 100
 basic.forever(function on_forever() {
-    let val = ramp(soll, 1)
+    let val = ramp(soll, 0.2)
     console.log(val)
     basic.pause(200)
 })
