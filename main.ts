@@ -1,42 +1,41 @@
-function on_button_pressed_a() {
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
     
-    console.log("A")
     soll = 0
-}
-
-input.onButtonPressed(Button.A, on_button_pressed_a)
-function on_button_pressed_b() {
+    console.log("A soll: " + soll)
+})
+input.onButtonPressed(Button.B, function on_button_pressed_b() {
     
-    console.log("B")
     soll = 100
-}
-
-input.onButtonPressed(Button.B, on_button_pressed_a)
+    console.log("B soll: " + soll)
+})
 function ramp(soll: number, grad: number): number {
-    let dval: number;
     
-    dt = (input.runningTime() - time) * grad
+    let dt = (input.runningTime() - time) / 1000
+    time = input.runningTime()
+    let dval = soll * dt * grad
     if (ist < soll) {
-        dval = soll * dt / 1000
         ist += dval
     } else {
         //  print(ist)
         ist = soll
     }
     
+    // print("soll: " + soll + "; ist: " + ist + "; dval: " +dval+ "; dt: " + dt)
     return Math.min(ist, soll)
 }
 
 let val = 0
 let ist = 0
-let dt = 0
-let soll = 0
-let time = 0
+let soll = 100
+let time = input.runningTime()
 input.buttonIsPressed(Button.A)
 time = input.runningTime()
 basic.forever(function on_forever() {
     
-    val = ramp(soll, 0.2)
-    //  print(val)
+    val = ramp(soll, 0.5)
+    if (soll != ist) {
+        console.log("soll: " + soll + "; ist: " + ist + "; val: " + val)
+    }
+    
     basic.pause(200)
 })
