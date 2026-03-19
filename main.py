@@ -2,34 +2,62 @@
 def on_button_pressed_a():
     global soll
     soll = 0
-    print("A soll: " + soll)
+    print("A soll: " + soll+ " ist: " + ist)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_button_pressed_b():
     global soll
     soll = 100
-    print("B soll: " + soll)
+    print("B soll: " + soll+ " ist: " + ist)
     
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
 def ramp(soll, grad):
     global ist, time
 
+    val = 0
+    maxOk = False
+    minOk = False
+    dt = (input.running_time() - time) / 1000
+    time = input.running_time()
+    dval = maxVal * dt * grad
+    if ist > soll:
+        ist -= dval
+    else:
+        maxOk = True
+    if ist < soll:
+        ist += dval
+    else:
+        minOk = True
+    #print("soll: " + soll + "; ist: " + ist + "; dval: " +dval+ "; dt: " + dt)
+    if maxOk:
+        print("maxOK")
+        return maxVal
+    elif minOk:
+        print("minOK")
+        return minVal
+    else:
+        print("ist")
+        return ist
+
+def ramp1(soll, grad):
+    global ist, time
+
     dt = (input.running_time() - time) / 1000
     time = input.running_time()
     dval = soll * dt * grad
-
-    if ist < soll:      
-        ist += dval
+    if ist > soll:
+        ist -= dval
     else:
-        # print(ist)
         ist = soll
+    
     #print("soll: " + soll + "; ist: " + ist + "; dval: " +dval+ "; dt: " + dt)
-    return min(ist, soll)
-
-
+    return soll
+      
 
 val = 0
+maxVal = 100
+minVal = 0
 ist = 0
 
 soll = 100
@@ -43,6 +71,7 @@ def on_forever():
 
     val = ramp(soll, 0.5)
     if soll != ist:
+        pass
         print("soll: " + soll + "; ist: " + ist + "; val: " +val)
     
     basic.pause(200)
