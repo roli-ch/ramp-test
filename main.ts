@@ -1,3 +1,17 @@
+function on_button_pressed_a() {
+    
+    console.log("A")
+    soll = 0
+}
+
+input.onButtonPressed(Button.A, on_button_pressed_a)
+function on_button_pressed_b() {
+    
+    console.log("B")
+    soll = 100
+}
+
+input.onButtonPressed(Button.B, on_button_pressed_a)
 function ramp(soll: number, grad: number): number {
     let dval: number;
     
@@ -13,22 +27,16 @@ function ramp(soll: number, grad: number): number {
     return Math.min(ist, soll)
 }
 
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
-    console.log("A")
-    let soll = 100
-})
 let val = 0
 let ist = 0
 let dt = 0
-let soll2 = 0
+let soll = 0
 let time = 0
-let soll3 = 0
 input.buttonIsPressed(Button.A)
 time = input.runningTime()
-let soll32 = 100
 basic.forever(function on_forever() {
     
-    val = ramp(soll32, 0.2)
+    val = ramp(soll, 0.2)
     //  print(val)
     basic.pause(200)
 })

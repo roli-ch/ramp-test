@@ -1,4 +1,15 @@
 
+def on_button_pressed_a():
+    global soll
+    print("A")
+    soll = 0
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+def on_button_pressed_b():
+    global soll
+    print("B")
+    soll = 100
+input.on_button_pressed(Button.B, on_button_pressed_a)
 
 def ramp(soll: number, grad: number):
     global dt, ist
@@ -11,25 +22,19 @@ def ramp(soll: number, grad: number):
         ist = soll
     return min(ist, soll)
 
-def on_button_pressed_a():
-    global soll
-    print("A")
-    soll = 100
-input.on_button_pressed(Button.A, on_button_pressed_a)
 
 val = 0
 ist = 0
 dt = 0
-soll2 = 0
+soll = 0
 time = 0
-soll3 = 0
 input.button_is_pressed(Button.A)
 time = input.running_time()
-soll32 = 100
+
 
 def on_forever():
     global val
-    val = ramp(soll32, 0.2)
+    val = ramp(soll, 0.2)
     # print(val)
     basic.pause(200)
 basic.forever(on_forever)
