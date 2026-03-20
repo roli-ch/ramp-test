@@ -1,19 +1,18 @@
 
 def on_button_pressed_a():
-    global soll
+    global soll1
     soll = 0
-    print("A soll: " + soll+ " ist: " + ist)
+    print("A soll: " + soll+ " ist: " + ist1)
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def on_button_pressed_b():
-    global soll
+    global soll1
     soll = 100
-    print("B soll: " + soll+ " ist: " + ist)
-    
+    print("B soll: " + soll+ " ist: " + ist1)  
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-def ramp(soll, grad):
-    global ist, time
+def ramp(soll, grad, kreis):
+    global ist1, time1, kreis1
 
     val = 0
     #maxOk = False
@@ -32,24 +31,22 @@ def ramp(soll, grad):
     #print("soll: " + soll + "; ist: " + ist + "; dval: " +dval+ "; dt: " + dt)
     return ist
 
-val = 0
 maxVal = 100
 minVal = 0
-ist = 0
 
-soll = 100
-time = input.running_time()
-input.button_is_pressed(Button.A)
-time = input.running_time()
+soll1 = 100
+ist1 = 0
+kreis1 = 1
+time1 = input.running_time()
 
 def on_forever():
-    global val, soll, ist
+    global soll1, ist1
 
-    val = ramp(soll, 0.5)
-    ok = (soll == ist)
+    val = ramp(soll1, 0.2, 1)
+    ok = (soll1 == ist1)
     if not ok:
         pass
-        print("soll: " + soll + "; ist: " + ist + "; val: " +val)
+        print("soll1: " + soll1 + "; ist1: " + ist1)
     else:
         showOk = True
     
